@@ -1,80 +1,80 @@
-# Security Study Web Application
+# セキュリティ学習用Webアプリケーション
 
-An educational web application designed for studying SQL injection vulnerabilities in web application security.
+WebアプリケーションセキュリティにおけるSQLインジェクション脆弱性を学習するための教育用Webアプリケーションです。
 
-## Overview
+## 概要
 
-This application demonstrates common SQL injection vulnerabilities in a controlled environment, allowing security students and professionals to practice identifying and exploiting these weaknesses safely.
+このアプリケーションは、制御された環境で一般的なSQLインジェクション脆弱性を実演し、セキュリティ学習者や専門家が安全にこれらの脆弱性を特定・悪用する練習を行えるようにします。
 
-## Features
+## 機能
 
-- **Vulnerable Login System**: Intentionally vulnerable to SQL injection attacks
-- **User Database**: Pre-populated with sample user data for testing
-- **Educational Interface**: Clear hints and guidance for learning
-- **Real-time Feedback**: Shows when SQL injection attempts are detected
-- **Complete User Data Exposure**: Demonstrates the impact of successful attacks
+- **脆弱なログインシステム**: 意図的にSQLインジェクション攻撃に対して脆弱
+- **ユーザーデータベース**: テスト用のサンプルユーザーデータを事前投入
+- **教育的インターフェース**: 学習のための明確なヒントとガイダンス
+- **リアルタイムフィードバック**: SQLインジェクション攻撃の試行を検出して表示
+- **完全なユーザーデータ露出**: 攻撃成功時の影響を実演
 
-## Technology Stack
+## 技術スタック
 
-- **Backend**: Node.js with Express.js and TypeScript
-- **Database**: In-memory database (simulating PostgreSQL structure)
-- **Testing**: Vitest with comprehensive test coverage
-- **Frontend**: Vanilla HTML/CSS/JavaScript with modern styling
+- **バックエンド**: Node.js + Express.js + TypeScript
+- **データベース**: インメモリデータベース（PostgreSQL構造をシミュレート）
+- **テスト**: Vitest による包括的テストカバレッジ
+- **フロントエンド**: バニラHTML/CSS/JavaScript（モダンスタイリング）
 
-## Installation
+## インストール
 
-1. Clone the repository
-2. Install dependencies:
+1. リポジトリをクローン
+2. 依存関係をインストール:
    ```bash
    npm install
    ```
 
-3. Build the application:
+3. アプリケーションをビルド:
    ```bash
    npm run build
    ```
 
-## Usage
+## 使用方法
 
-### Development Mode
+### 開発モード
 ```bash
 npm run dev
 ```
-The application will be available at `http://localhost:3000`
+アプリケーションは `http://localhost:3000` で利用可能になります
 
-### Production Mode
+### 本番モード
 ```bash
 npm run build
 npm start
 ```
 
-### Running Tests
+### テスト実行
 ```bash
 npm test
 ```
 
-## SQL Injection Examples
+## SQLインジェクション攻撃例
 
-### Basic OR Injection
-- **Username**: `' OR '1'='1`
-- **Password**: `anything`
-- **Result**: Bypasses authentication and returns all users
+### 基本的なOR条件攻撃
+- **ユーザー名**: `' OR '1'='1`
+- **パスワード**: `何でも`
+- **結果**: 認証をバイパスして全ユーザーを返却
 
-### Comment Injection
-- **Username**: `admin'--`
-- **Password**: `anything`
-- **Result**: Bypasses password check for admin user
+### コメント注入攻撃
+- **ユーザー名**: `admin'--`
+- **パスワード**: `何でも`
+- **結果**: adminユーザーのパスワードチェックをバイパス
 
-### UNION Injection
-- **Username**: `admin' UNION SELECT * FROM users --`
-- **Password**: `anything`
-- **Result**: Returns all user data
+### UNION攻撃
+- **ユーザー名**: `admin' UNION SELECT * FROM users --`
+- **パスワード**: `何でも`
+- **結果**: 全ユーザーデータを返却
 
-## Sample Users
+## サンプルユーザー
 
-The application includes the following pre-populated users for testing:
+アプリケーションには以下のテスト用ユーザーが事前投入されています：
 
-| Username | Email | Role | Password |
+| ユーザー名 | メールアドレス | ロール | パスワード |
 |----------|-------|------|----------|
 | admin | admin@company.com | admin | admin123 |
 | john_doe | john@company.com | user | password123 |
@@ -82,57 +82,57 @@ The application includes the following pre-populated users for testing:
 | bob_wilson | bob@company.com | manager | mypass789 |
 | alice_brown | alice@company.com | user | alice2024 |
 
-## Security Vulnerabilities (Intentional)
+## セキュリティ脆弱性（意図的）
 
-⚠️ **WARNING**: This application contains intentional security vulnerabilities for educational purposes only.
+⚠️ **警告**: このアプリケーションは教育目的のみのために意図的なセキュリティ脆弱性を含んでいます。
 
-### SQL Injection Vulnerabilities
+### SQLインジェクション脆弱性
 
-1. **Direct String Concatenation**: User input is directly concatenated into SQL queries
-2. **No Input Validation**: No sanitization or validation of user inputs
-3. **Verbose Error Messages**: Detailed error information exposed to attackers
-4. **No Rate Limiting**: No protection against brute force attacks
+1. **直接文字列連結**: ユーザー入力がSQLクエリに直接連結される
+2. **入力検証なし**: ユーザー入力のサニタイゼーションや検証がない
+3. **詳細なエラーメッセージ**: 攻撃者に詳細なエラー情報を露出
+4. **レート制限なし**: ブルートフォース攻撃に対する保護がない
 
-### Educational Value
+### 教育的価値
 
-This application demonstrates:
-- How SQL injection attacks work
-- The impact of successful attacks (data exposure)
-- Common attack vectors and techniques
-- The importance of proper input validation and parameterized queries
+このアプリケーションは以下を実演します：
+- SQLインジェクション攻撃の仕組み
+- 攻撃成功時の影響（データ露出）
+- 一般的な攻撃ベクターと技術
+- 適切な入力検証とパラメータ化クエリの重要性
 
-## Testing
+## テスト
 
-The application includes comprehensive tests covering:
-- Normal authentication flows
-- SQL injection vulnerability verification
-- Error handling
-- API endpoint functionality
+アプリケーションには以下をカバーする包括的テストが含まれています：
+- 通常の認証フロー
+- SQLインジェクション脆弱性の検証
+- エラーハンドリング
+- APIエンドポイント機能
 
-Run tests with: `npm test`
+テスト実行: `npm test`
 
-## Project Structure
+## プロジェクト構造
 
 ```
 security-study-app/
 ├── src/
-│   ├── index.ts          # Main Express application
-│   ├── database.ts       # In-memory database with vulnerabilities
-│   ├── index.test.ts     # API endpoint tests
-│   └── database.test.ts  # Database functionality tests
+│   ├── index.ts          # メインExpressアプリケーション
+│   ├── database.ts       # 脆弱性を含むインメモリデータベース
+│   ├── index.test.ts     # APIエンドポイントテスト
+│   └── database.test.ts  # データベース機能テスト
 ├── public/
-│   └── index.html        # Frontend login interface
-├── dist/                 # Compiled TypeScript output
-├── package.json          # Dependencies and scripts
-├── tsconfig.json         # TypeScript configuration
-├── vitest.config.ts      # Test configuration
-└── README.md            # This file
+│   └── index.html        # フロントエンドログインインターフェース
+├── dist/                 # コンパイル済みTypeScript出力
+├── package.json          # 依存関係とスクリプト
+├── tsconfig.json         # TypeScript設定
+├── vitest.config.ts      # テスト設定
+└── README.md            # このファイル
 ```
 
-## Educational Use Only
+## 教育用途のみ
 
-This application is designed exclusively for educational purposes in controlled environments. It should never be deployed to production or used with real user data.
+このアプリケーションは制御された環境での教育目的専用に設計されています。本番環境への展開や実際のユーザーデータでの使用は絶対に行わないでください。
 
-## License
+## ライセンス
 
-This project is for educational use only.
+このプロジェクトは教育用途のみです。

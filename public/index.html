@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Security Study - Login System</title>
+    <title>セキュリティ学習 - ログインシステム</title>
     <style>
         * {
             margin: 0;
@@ -167,31 +167,31 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Security Study Login</h1>
-            <p>Educational SQL Injection Demonstration</p>
+            <h1>セキュリティ学習ログイン</h1>
+            <p>教育用SQLインジェクション実演</p>
         </div>
 
         <form id="loginForm">
             <div class="form-group">
-                <label for="username">Username:</label>
+                <label for="username">ユーザー名:</label>
                 <input type="text" id="username" name="username" required>
             </div>
 
             <div class="form-group">
-                <label for="password">Password:</label>
+                <label for="password">パスワード:</label>
                 <input type="password" id="password" name="password" required>
             </div>
 
-            <button type="submit" class="btn">Login</button>
+            <button type="submit" class="btn">ログイン</button>
         </form>
 
         <div id="result" class="result"></div>
 
         <div class="hint">
-            <h4>🎯 Study Objectives:</h4>
-            <p>Try to bypass the login using SQL injection techniques.</p>
-            <p>Sample usernames: <code>admin</code>, <code>john_doe</code>, <code>jane_smith</code></p>
-            <p>Hint: What happens if you use <code>' OR '1'='1</code> in the username field?</p>
+            <h4>🎯 学習目標:</h4>
+            <p>SQLインジェクション技術を使用してログインをバイパスしてみてください。</p>
+            <p>サンプルユーザー名: <code>admin</code>, <code>john_doe</code>, <code>jane_smith</code></p>
+            <p>ヒント: ユーザー名フィールドに <code>' OR '1'='1</code> を使用するとどうなりますか？</p>
         </div>
     </div>
 
@@ -219,27 +219,27 @@
                     resultDiv.style.display = 'block';
                     
                     let html = `
-                        <h3>✅ Login Successful!</h3>
+                        <h3>✅ ログイン成功！</h3>
                         <div class="user-info">
                             <p><strong>ID:</strong> ${data.user.id}</p>
-                            <p><strong>Username:</strong> ${data.user.username}</p>
-                            <p><strong>Email:</strong> ${data.user.email}</p>
-                            <p><strong>Full Name:</strong> ${data.user.full_name}</p>
-                            <p><strong>Role:</strong> ${data.user.role}</p>
+                            <p><strong>ユーザー名:</strong> ${data.user.username}</p>
+                            <p><strong>メールアドレス:</strong> ${data.user.email}</p>
+                            <p><strong>氏名:</strong> ${data.user.full_name}</p>
+                            <p><strong>ロール:</strong> ${data.user.role}</p>
                         </div>
                     `;
 
                     if (data.allUsers && data.allUsers.length > 1) {
                         html += `
-                            <h4 style="margin-top: 1rem; color: #dc3545;">🚨 SQL Injection Detected!</h4>
-                            <p style="color: #dc3545;">Multiple users returned - this indicates a successful SQL injection attack!</p>
+                            <h4 style="margin-top: 1rem; color: #dc3545;">🚨 SQLインジェクション検出！</h4>
+                            <p style="color: #dc3545;">複数のユーザーが返却されました - これはSQLインジェクション攻撃の成功を示しています！</p>
                             <table class="users-table">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Username</th>
-                                        <th>Email</th>
-                                        <th>Role</th>
+                                        <th>ユーザー名</th>
+                                        <th>メールアドレス</th>
+                                        <th>ロール</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -266,12 +266,12 @@
                 } else {
                     resultDiv.className = 'result error';
                     resultDiv.style.display = 'block';
-                    resultDiv.innerHTML = `<h3>❌ Login Failed</h3><p>${data.error}</p>`;
+                    resultDiv.innerHTML = `<h3>❌ ログイン失敗</h3><p>${data.error}</p>`;
                 }
             } catch (error) {
                 resultDiv.className = 'result error';
                 resultDiv.style.display = 'block';
-                resultDiv.innerHTML = `<h3>❌ Error</h3><p>Network error: ${error.message}</p>`;
+                resultDiv.innerHTML = `<h3>❌ エラー</h3><p>ネットワークエラー: ${error.message}</p>`;
             }
         });
     </script>
