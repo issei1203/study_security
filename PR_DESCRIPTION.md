@@ -1,117 +1,69 @@
-# Educational SQL Injection Study Application
+# 教育用SQLインジェクション脆弱性学習アプリケーション
 
-## Overview
-Complete TypeScript web application designed for internal security study sessions, featuring intentional SQL injection vulnerabilities for educational purposes.
+## 変更内容
 
-## Implementation Details
+### 新規追加ファイル
+- `src/index.ts` - Express.jsサーバーと脆弱なログインAPI実装
+- `src/database.ts` - 意図的なSQLインジェクション脆弱性を含むデータベースクラス
+- `src/index.test.ts` - APIエンドポイントの単体テスト
+- `src/database.test.ts` - データベース機能とSQLインジェクション脆弱性のテスト
+- `public/index.html` - 教育用ログインインターフェース
+- `package.json` - 依存関係とスクリプト設定
+- `tsconfig.json` - TypeScript設定
+- `vitest.config.ts` - テスト設定
+- `README.md` - 完全なドキュメントとセットアップ手順
 
-**Technology Stack (as requested):**
-- ✅ TypeScript programming language
-- ✅ Express web framework  
-- ✅ npm package manager
-- ✅ Vitest unit testing framework
-- ✅ PostgreSQL-style database structure (in-memory implementation)
+### 実装機能
+- **脆弱なログインシステム**: 複数のSQLインジェクション攻撃ベクターに対応
+- **ユーザーテーブル**: 5人のサンプルユーザーデータを事前投入（admin, john_doe, jane_smith, bob_wilson, alice_brown）
+- **教育的フィードバック**: SQLインジェクション攻撃の検出と表示
+- **包括的テストスイート**: 11個の単体テストで脆弱性を検証
+- **SQLインジェクション攻撃例**: OR条件バイパス（`' OR '1'='1`）、コメント注入（`admin'--`）、UNION攻撃
 
-## Key Features
+### 技術スタック
+- TypeScript + Express + Vitest
+- PostgreSQL形式のデータベース構造（インメモリ実装）
+- npm パッケージマネージャー
 
-### 🎯 Vulnerable Login System
-- Intentionally susceptible to multiple SQL injection attack vectors
-- Real-time attack detection and logging
-- Educational feedback when attacks are successful
+## 実行方法
 
-### 👥 Users Table Implementation
-Pre-populated with 5 sample users for testing:
-- `admin` (admin@company.com) - Administrator role
-- `john_doe` (john@company.com) - User role  
-- `jane_smith` (jane@company.com) - User role
-- `bob_wilson` (bob@company.com) - Manager role
-- `alice_brown` (alice@company.com) - User role
-
-### 🔓 SQL Injection Attack Scenarios
-
-**1. OR Injection Bypass**
-- Input: `' OR '1'='1` in username field
-- Result: Complete authentication bypass, returns all users
-
-**2. Comment Injection**  
-- Input: `admin'--` in username field
-- Result: Bypasses password verification for admin user
-
-**3. UNION Attack**
-- Input: `admin' UNION SELECT * FROM users --` 
-- Result: Extracts complete user database
-
-## Testing & Verification
-
-### ✅ Comprehensive Test Suite
-- **11 unit tests** covering normal authentication flows
-- **SQL injection vulnerability verification** tests
-- **API endpoint functionality** tests
-- **Error handling** coverage
-
-### ✅ Browser Testing Confirmed
-![SQL Injection Demo](![alt text](/home/ubuntu/screenshots/localhost_3000_123722.png))
-
-The screenshot demonstrates successful SQL injection attack showing:
-- Authentication bypass achieved
-- Complete user database exposed in table format
-- Clear "SQL Injection Detected!" warning for educational purposes
-
-## Educational Value
-
-### 🎓 Learning Objectives
-- Understand how SQL injection vulnerabilities work
-- Practice identifying and exploiting security weaknesses
-- See real-world impact of successful attacks
-- Learn importance of input validation and parameterized queries
-
-### 🔍 Attack Vector Coverage
-- String concatenation vulnerabilities
-- Input validation bypass techniques  
-- Comment-based SQL injection
-- UNION-based data extraction
-- Boolean-based authentication bypass
-
-## Project Structure
-
-```
-security-study-app/
-├── src/
-│   ├── index.ts          # Main Express application with vulnerable endpoints
-│   ├── database.ts       # In-memory database with intentional vulnerabilities
-│   ├── index.test.ts     # API endpoint tests
-│   └── database.test.ts  # Database functionality tests
-├── public/
-│   └── index.html        # Educational login interface with hints
-├── package.json          # Dependencies and scripts
-├── tsconfig.json         # TypeScript configuration
-├── vitest.config.ts      # Test configuration
-└── README.md            # Complete documentation
-```
-
-## Security Warnings
-
-⚠️ **EDUCATIONAL USE ONLY**: This application contains intentional security vulnerabilities and should never be deployed to production environments or used with real user data.
-
-## Usage Instructions
-
-### Development Mode
+### 開発環境セットアップ
 ```bash
 npm install
 npm run dev
-# Application available at http://localhost:3000
 ```
+アプリケーションは `http://localhost:3000` で利用可能
 
-### Testing
+### テスト実行
 ```bash
 npm test
-# All 11 tests should pass
+```
+11個のテストすべてが合格する必要があります
+
+### 本番ビルド
+```bash
+npm run build
+npm start
 ```
 
-## Link to Devin Run
-https://app.devin.ai/sessions/699c45e0b9ec4acaa4620953b738f320
+## 備考
 
-## Requested by
+### セキュリティ警告
+⚠️ **教育用途のみ**: このアプリケーションは意図的なセキュリティ脆弱性を含んでおり、本番環境への展開や実際のユーザーデータでの使用は絶対に行わないでください。
+
+### 学習目的
+- SQLインジェクション脆弱性の仕組みを理解
+- セキュリティ脆弱性の特定と悪用の練習
+- 攻撃成功時の実世界への影響を確認
+- 入力検証とパラメータ化クエリの重要性を学習
+
+### 攻撃シナリオ例
+1. **OR条件による認証バイパス**: `' OR '1'='1` → 全ユーザー情報を返却
+2. **コメント注入**: `admin'--` → adminユーザーのパスワード検証をバイパス
+3. **UNION攻撃**: `admin' UNION SELECT * FROM users --` → 完全なユーザーデータベースを抽出
+
+### 依頼者
 板垣一成 (i-itagaki@atware.co.jp)
 
-This application is ready for immediate use in your internal security study session, providing a safe environment for participants to practice SQL injection techniques and understand their real-world impact.
+### Devin実行リンク
+https://app.devin.ai/sessions/699c45e0b9ec4acaa4620953b738f320
